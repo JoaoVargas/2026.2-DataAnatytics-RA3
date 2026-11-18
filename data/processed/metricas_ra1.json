@@ -1,0 +1,374 @@
+{
+  "arquivo_bruto_bytes": 23715344,
+  "arquivo_bruto_sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+  "linhas_bruto": 541909,
+  "colunas_bruto": 8,
+  "diagnostico": [
+    {
+      "ID": "Q1a",
+      "campo": "InvoiceNo",
+      "verificação / regra": "tipo único (texto): linhas armazenadas como número",
+      "ocorrências": 532618,
+      "% do denominador": 98.28550550000092,
+      "nota": "coluna 'object' com texto e inteiros misturados"
+    },
+    {
+      "ID": "Q1b",
+      "campo": "StockCode",
+      "verificação / regra": "tipo único (texto): linhas armazenadas como número",
+      "ocorrências": 487036,
+      "% do denominador": 89.87413015838453,
+      "nota": "coluna 'object' com texto e inteiros misturados"
+    },
+    {
+      "ID": "Q1c",
+      "campo": "CustomerID",
+      "verificação / regra": "identificador não deve ser decimal (float)",
+      "ocorrências": 406829,
+      "% do denominador": 75.0733056657114,
+      "nota": "lido como float64 por causa dos ausentes"
+    },
+    {
+      "ID": "Q2",
+      "campo": "Description",
+      "verificação / regra": "descrição nula",
+      "ocorrências": 1454,
+      "% do denominador": 0.2683107311375157,
+      "nota": ""
+    },
+    {
+      "ID": "Q3",
+      "campo": "CustomerID",
+      "verificação / regra": "cliente não identificado (nulo)",
+      "ocorrências": 135080,
+      "% do denominador": 24.926694334288598,
+      "nota": ""
+    },
+    {
+      "ID": "Q4",
+      "campo": "todas",
+      "verificação / regra": "linha idêntica a outra anterior (todas as colunas)",
+      "ocorrências": 5268,
+      "% do denominador": 0.9721189350979592,
+      "nota": ""
+    },
+    {
+      "ID": "Q5",
+      "campo": "InvoiceNo+StockCode",
+      "verificação / regra": "repetição de fatura+produto com valores diferentes (não é erro; teste de chave)",
+      "ocorrências": 10231,
+      "% do denominador": 1.887955357818379,
+      "nota": "mostra que a chave natural não é única; mantido como está"
+    },
+    {
+      "ID": "Q6",
+      "campo": "InvoiceNo",
+      "verificação / regra": "fora do padrão C?+6 dígitos (prefixo 'A')",
+      "ocorrências": 3,
+      "% do denominador": 0.0005535984824020268,
+      "nota": "faturas 'A…' são ajustes contábeis de dívida incobrável"
+    },
+    {
+      "ID": "Q7a",
+      "campo": "StockCode",
+      "verificação / regra": "código fora do padrão de produto (5 dígitos + letras): frete, taxas, amostras etc.",
+      "ocorrências": 2995,
+      "% do denominador": 0.5526758182646901,
+      "nota": ""
+    },
+    {
+      "ID": "Q7b",
+      "campo": "StockCode",
+      "verificação / regra": "sufixo em minúscula (mesmo produto pode existir em caixa diferente)",
+      "ocorrências": 1942,
+      "% do denominador": 0.35836275094157877,
+      "nota": "111 códigos coincidem com a versão maiúscula"
+    },
+    {
+      "ID": "Q8a",
+      "campo": "Description",
+      "verificação / regra": "espaços no início/fim",
+      "ocorrências": 113453,
+      "% do denominador": 20.9921270040984,
+      "nota": "denominador: descrições não nulas"
+    },
+    {
+      "ID": "Q8b",
+      "campo": "Description",
+      "verificação / regra": "espaços duplos internos",
+      "ocorrências": 22290,
+      "% do denominador": 4.12430267089767,
+      "nota": "denominador: descrições não nulas"
+    },
+    {
+      "ID": "Q8c",
+      "campo": "Description",
+      "verificação / regra": "texto não padronizado em maiúsculas (muitas são anotações operacionais)",
+      "ocorrências": 3037,
+      "% do denominador": 0.5619339260437964,
+      "nota": "denominador: descrições não nulas"
+    },
+    {
+      "ID": "Q9",
+      "campo": "Quantity",
+      "verificação / regra": "quantidade ≤ 0 em fatura que não é cancelamento",
+      "ocorrências": 1336,
+      "% do denominador": 0.24653585749636933,
+      "nota": "todas com preço 0 e sem cliente: baixa/ajuste de estoque"
+    },
+    {
+      "ID": "Q10",
+      "campo": "UnitPrice",
+      "verificação / regra": "preço = 0",
+      "ocorrências": 2515,
+      "% do denominador": 0.4641000610803659,
+      "nota": "ajustes de estoque e brindes; sem valor de venda"
+    },
+    {
+      "ID": "Q11",
+      "campo": "UnitPrice",
+      "verificação / regra": "preço < 0",
+      "ocorrências": 2,
+      "% do denominador": 0.0003690656549346846,
+      "nota": "ajuste contábil (faturas 'A')"
+    },
+    {
+      "ID": "Q11b",
+      "campo": "Quantity x InvoiceNo",
+      "verificação / regra": "quantidade > 0 em fatura de cancelamento ('C')",
+      "ocorrências": 0,
+      "% do denominador": 0.0,
+      "nota": "sem ocorrências — verificação aprovada"
+    },
+    {
+      "ID": "Q12",
+      "campo": "Country",
+      "verificação / regra": "rótulos fora do padrão (EIRE, RSA, USA), 'Unspecified' e 'European Community'",
+      "ocorrências": 9052,
+      "% do denominador": 1.6703911542343826,
+      "nota": "'Unspecified' e 'European Community' não identificam um país"
+    },
+    {
+      "ID": "Q12b",
+      "campo": "CustomerID x Country",
+      "verificação / regra": "cliente com mais de um país",
+      "ocorrências": 8,
+      "% do denominador": 0.18298261665141813,
+      "nota": "denominador: clientes distintos"
+    },
+    {
+      "ID": "Q13",
+      "campo": "StockCode x Description",
+      "verificação / regra": "código de produto com mais de uma descrição (vendas)",
+      "ocorrências": 212,
+      "% do denominador": 5.435897435897436,
+      "nota": "denominador: códigos de produto em linhas de venda"
+    },
+    {
+      "ID": "Q14a",
+      "campo": "Quantity",
+      "verificação / regra": "|quantidade| acima do P99,9 das vendas válidas (450)",
+      "ocorrências": 670,
+      "% do denominador": 0.12363699440311934,
+      "nota": "extremos podem ser reais (atacado); não são erro por si só"
+    },
+    {
+      "ID": "Q14b",
+      "campo": "UnitPrice",
+      "verificação / regra": "preço unitário ≥ 100 em vendas válidas",
+      "ocorrências": 812,
+      "% do denominador": 0.14984065590348195,
+      "nota": "majoritariamente códigos de serviço (DOT, M)"
+    },
+    {
+      "ID": "Q15",
+      "campo": "InvoiceDate",
+      "verificação / regra": "valor nulo ou fora do período 2010-12-01 a 2011-12-09",
+      "ocorrências": 0,
+      "% do denominador": 0.0,
+      "nota": "verificação aprovada: sem datas nulas ou fora do período"
+    },
+    {
+      "ID": "Q16",
+      "campo": "InvoiceDate",
+      "verificação / regra": "mês incompleto no fim da série (dez/2011 com 8 dias)",
+      "ocorrências": 25525,
+      "% do denominador": 4.710200421103912,
+      "nota": "uso na análise deve excluir dez/2011 de comparações mensais"
+    },
+    {
+      "ID": "Q17",
+      "campo": "InvoiceDate",
+      "verificação / regra": "fatura com mais de um horário entre linhas",
+      "ocorrências": 43,
+      "% do denominador": 0.16602316602316602,
+      "nota": "denominador: faturas distintas; diferença de 1 minuto"
+    },
+    {
+      "ID": "Q18",
+      "campo": "InvoiceNo x CustomerID/Country",
+      "verificação / regra": "fatura com mais de um cliente ou país",
+      "ocorrências": 0,
+      "% do denominador": 0.0,
+      "nota": "verificação aprovada; denominador: faturas distintas"
+    }
+  ],
+  "codigos_minuscula_padronizados": 1942,
+  "excluidas_ajuste_contabil": 3,
+  "excluidas_preco_zero_negativo": 2515,
+  "excluidas_preco_com_cliente": 40,
+  "excluidas_duplicatas": 5263,
+  "valor_duplicatas_gbp": 21740.980000000003,
+  "pct_valor_duplicatas": 0.20403294160097424,
+  "linhas_item_nao_produto": 2923,
+  "codigos_multi_descricao_antes": 207,
+  "pais_unspecified_para_ausente": 442,
+  "limite_quantidade_extrema": 456.0,
+  "linhas_quantidade_extrema": 555,
+  "linhas_preparado": 534128,
+  "linhas_excluidas": 7781,
+  "exclusoes_por_motivo": {
+    "duplicata_exata": 5263,
+    "preco_zero_ou_negativo": 2515,
+    "fatura_ajuste_contabil": 3
+  },
+  "verificacoes_finais": [
+    {
+      "verificação": "Chave técnica linha_origem é única",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "Sem linhas duplicadas nas colunas de negócio",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "fatura segue o padrão C?dddddd",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "tipo_transacao coerente com o sinal da quantidade",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "quantidade nunca é zero",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "preco_unitario > 0",
+      "resultado": "OK",
+      "detalhe": "mín. = 0.001"
+    },
+    {
+      "verificação": "descricao e descricao_padrao sem nulos",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "codigo_produto sem nulos e em maiúsculas",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "cliente_id: 5 dígitos ou ausente",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "cliente_identificado coerente com cliente_id",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "data_hora sem nulos e dentro do período",
+      "resultado": "OK",
+      "detalhe": "2010-12-01 08:26:00 → 2011-12-09 12:50:00"
+    },
+    {
+      "verificação": "Um único país por fatura",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "Uma única descricao_padrao por código de produto",
+      "resultado": "OK",
+      "detalhe": ""
+    },
+    {
+      "verificação": "Rótulos de país padronizados (sem EIRE/RSA/USA/Unspecified)",
+      "resultado": "OK",
+      "detalhe": ""
+    }
+  ],
+  "comparacao": [
+    {
+      "medida": "Registros",
+      "após ingestão": 541909.0,
+      "após preparação": 534128.0
+    },
+    {
+      "medida": "Atributos",
+      "após ingestão": 8.0,
+      "após preparação": 14.0
+    },
+    {
+      "medida": "Descrição nula",
+      "após ingestão": 1454.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Cliente nulo (linhas)",
+      "após ingestão": 135080.0,
+      "após preparação": 132564.0
+    },
+    {
+      "medida": "Cliente nulo (% das linhas)",
+      "após ingestão": 24.93,
+      "após preparação": 24.82
+    },
+    {
+      "medida": "Linhas duplicadas exatas",
+      "após ingestão": 5268.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Preço unitário ≤ 0",
+      "após ingestão": 2517.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Quantidade ≤ 0 fora de cancelamento",
+      "após ingestão": 1336.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Faturas fora do padrão C?dddddd (linhas)",
+      "após ingestão": 3.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Códigos de produto com minúscula (linhas)",
+      "após ingestão": 1942.0,
+      "após preparação": 0.0
+    },
+    {
+      "medida": "Rótulos distintos de país",
+      "após ingestão": 38.0,
+      "após preparação": 37.0
+    },
+    {
+      "medida": "Códigos de produto com >1 descrição",
+      "após ingestão": 207.0,
+      "após preparação": 0.0
+    }
+  ],
+  "ambiente": {
+    "python": "3.12.3",
+    "pandas": "3.0.2",
+    "numpy": "2.4.4"
+  }
+}
